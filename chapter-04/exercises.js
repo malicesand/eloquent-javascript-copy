@@ -2,39 +2,63 @@
 // range ///////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function range() {
-
+function range(start, end, output = []) {
+  
+    if (output.length >= 1 && start === end){
+      output.push(start)
+      return output
+      
+    } else if (start === end) {
+      return output
+    }
+    if (start < end) {
+      output.push(start)
+      return range(start + 1, end, output)
+    }
+    if (start > end) {
+      output.unshift(start)
+      return range(start - 1, end, output)
+    }
+  
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // sum /////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function sum() {
-
+function sum(array, count = 0) {
+  if (array.length === 0) {
+    return count
+  }
+  count += array[0];
+  return sum(array.slice(1), count)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // reverseArray ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function reverseArray() {
-
+function reverseArray(array, output = []) {
+  if (array.length === 0) {
+    return output
+  }
+  output.unshift(array[0])
+  return reverseArray(array.slice(1), output)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // reverseArrayInPlace /////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function reverseArrayInPlace() {
-
+function reverseArrayInPlace(array) {
+  return array.reverse()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // arrayToList /////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function arrayToList() {
+function arrayToList(array) {
 
 }
 
@@ -66,9 +90,55 @@ function nth() {
 // deepEqual ///////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function deepEqual() {
-
+function deepEqual(a, b) {
+  if (typeof a === 'string' && typeof b === 'string'){
+    if (a === b) {
+      return true
+    } else {
+      return false
+    }
+  }
+  if (typeof a === 'number' && typeof b === 'number'){
+    if (a === b) {
+      return true
+    } else {
+      return false
+    }
+  }
+  if (typeof a === 'boolean' && typeof b === 'boolean'){
+    if (a === b) {
+      return true
+    } else {
+      return false
+    }
+  }
+  if (typeof a === 'object' && typeof b === 'object') {
+    var objA = Object.keys(a);
+    var objB = Object.keys(b);
+    if (objA.length === objB.length) {
+      if (objA.length === 0 && objB.length === 0) {
+        return true
+      }
+      var objAA = Object.entries(a);
+      var objBB = Object.entries(b);
+      if(objAA[0].length === objBB.length) {
+        if (objAA === objBB) {
+          return true
+        } else {
+          return false
+        }
+      } else {
+        return false
+      }
+    } else {
+      return false
+    }
+    
+  } else {
+    return false
+  }
 }
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE //////////////////////////////////////////////////////
