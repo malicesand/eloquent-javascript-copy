@@ -2,23 +2,22 @@
 // range ///////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function range(start, end, output = []) {
+function range(start, end, step = 1) {
   
-    if (output.length >= 1 && start === end){
-      output.push(start)
-      return output
-      
-    } else if (start === end) {
-      return output
+    let output = []
+    if (start < end && step > 0){
+      while (start <= end) {
+        output.push(start)
+        start += step
+      }
+    } else if (start > end) {
+        while (start >= end) {
+          output.push(start);
+          start -= step
+        }
     }
-    if (start < end) {
-      output.push(start)
-      return range(start + 1, end, output)
-    }
-    if (start > end) {
-      output.unshift(start)
-      return range(start - 1, end, output)
-    }
+return output
+
   
 }
 
