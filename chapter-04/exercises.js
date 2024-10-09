@@ -103,55 +103,24 @@ function nth(list, n) {
 // deepEqual ///////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function deepEqual(a, b) {
-  if (typeof a === 'string' && typeof b === 'string'){
-    if (a === b) {
-      return true
-    } else {
-      return false
-    }
+function deepEqual(x, y) {
+  if (typeof x !== 'object' && typeof y !== 'object'){
+    return x === y;
   }
-  if (typeof a === 'number' && typeof b === 'number'){
-    if (a === b) {
-      return true
-    } else {
-      return false
-    }
-  }
-  if (typeof a === 'boolean' && typeof b === 'boolean'){
-    if (a === b) {
-      return true
-    } else {
-      return false
-    }
-  }
-  if (typeof a === 'object' && typeof b === 'object') {
-    var objA = Object.keys(a);
-    var objB = Object.keys(b);
-    if (objA.length === objB.length) {
-      if (objA.length === 0 && objB.length === 0) {
-        return true
-      } if (objA[0] != objB[0]) {
-          return false
-      }
-      var objAA = Object.entries(a);
-      var objBB = Object.entries(b);
-      if(objAA[0].length === objBB[0].length) {
-        if (objAA == objBB) {
-          return true
-        } else {
-          return false
-        }
-      } else {
-        return false
-      }
-    } else {
-      return false
-    }
-    
-  } else {
+  if (typeof x !== 'object' || typeof y !== 'object') {
     return false
   }
+  let xKeys = Object.keys(x)
+  let yKeys = Object.keys(y)
+  if (xKeys.length !== yKeys.length){
+    return false
+  }
+  for (let i = 0; i < xKeys.length; i++){
+    if(!yKeys.includes(xKeys[i]) || !deepEqual(x[xKeys[i]], y[xKeys[i]])){
+      return false
+    }
+  }
+  return true
 }
 
 
